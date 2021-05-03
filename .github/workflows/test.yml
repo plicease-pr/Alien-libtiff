@@ -1,0 +1,23 @@
+name: Test
+on:
+  - push
+  - pull_request
+jobs:
+  ubuntu-latest:
+    name: ubuntu-latest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cpan -f Alien::Build
+      - run: perl Makefile.PL
+      - run: make
+      - run: make test TEST_VERBOSE=1
+  windows-latest:
+    name: windows-latest
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cpan Alien::Build
+      - run: perl Makefile.PL
+      - run: make
+      - run: make test TEST_VERBOSE=1

@@ -4,6 +4,11 @@ plugin 'PkgConfig' => (
   pkg_name => 'libtiff-4',
 );
 
+plugin 'Probe::CommandLine' => (
+  command   => 'tiffcp',
+  secondary => 1,
+);
+
 share {
 
   plugin Download => (

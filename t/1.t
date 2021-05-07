@@ -1,4 +1,14 @@
-use IPC::Cmd qw(can_run run);
-use Test::More tests => 1;
+use strict;
+use warnings;
+use Test::More tests => 3;
+use Test::Alien;
+use Alien::libtiff;
+use File::Temp;
 
-ok can_run('tiffcp'), 'tiffcp';
+alien_ok 'Alien::libtiff';
+
+my $dest = File::Temp->new( TEMPLATE => 'fooXXXX', SUFFIX => '.tiff' );
+
+run_ok(['tiffcp', 't/x.tiff', "$dest"])
+  ->success;
+

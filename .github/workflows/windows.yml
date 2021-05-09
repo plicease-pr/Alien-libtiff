@@ -40,6 +40,8 @@ jobs:
         run: |
           cpanm --installdeps .
       - name: Build
-        run: make
+        run: |
+          perl Makefile.PL
+          make
       - name: Run Tests
         run: make test TEST_VERBOSE=1

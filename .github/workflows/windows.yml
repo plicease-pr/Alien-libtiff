@@ -4,19 +4,14 @@ on:
   - push
   - pull_request
 
-env:
-  PERL5LIB: c:\cx\lib\perl5
-  PERL_LOCAL_LIB_ROOT: c:/cx
-  PERL_MB_OPT: --install_base C:/cx
-  PERL_MM_OPT: INSTALL_BASE=C:/cx
-  ALIEN_INSTALL_TYPE: system
-
 jobs:
   perl:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cpan Alien::Build PkgConfig Sort::Versions
+      - run: cpan Alien::Build PkgConfig Sort::Versions App::pwhich
+      - run: perl -V
+      - run: pwhich perl
       - run: perl Makefile.PL
       - run: make
       - run: make test TEST_VERBOSE=1
